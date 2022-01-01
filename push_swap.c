@@ -18,15 +18,15 @@ void print_arr(t_stack **stack)
 	while (temp)
 	{
 		printf("data: %d\n", temp->data);
-		temp = temp->next; 
+		temp = temp->next;
 	}
 }
 
 int set_a(char **av, int len, t_stack **a)
 {
-	int 		i;
-	long int 	tmp;
-	t_stack		*temp_stack;
+	int i;
+	long int tmp;
+	t_stack *temp_stack;
 
 	if (check_input_error(av, len))
 		return (1);
@@ -46,7 +46,7 @@ int set_a(char **av, int len, t_stack **a)
 	return (0);
 }
 
-void	pa_loop(t_stack **a, t_stack **b)
+void pa_loop(t_stack **a, t_stack **b)
 {
 	t_stack *temp = *b;
 	while (temp)
@@ -56,7 +56,7 @@ void	pa_loop(t_stack **a, t_stack **b)
 	}
 }
 
-void	pb_loop(t_stack **b, t_stack **a)
+void pb_loop(t_stack **b, t_stack **a)
 {
 	t_stack *temp = *a;
 	while (temp)
@@ -66,11 +66,11 @@ void	pb_loop(t_stack **b, t_stack **a)
 	}
 }
 
-int	is_sorted(t_stack **stack, char c)
+int is_sorted(t_stack **stack, char c)
 {
 	t_stack *temp = *stack;
 	int des;
-	int	asc;
+	int asc;
 
 	des = 0;
 	asc = 0;
@@ -87,7 +87,7 @@ int	is_sorted(t_stack **stack, char c)
 	return (0);
 }
 
-int	is_MaxInTop(t_stack **stack)
+int is_MinInTop(t_stack **stack)
 {
 	t_stack *temp = *stack;
 
@@ -97,57 +97,40 @@ int	is_MaxInTop(t_stack **stack)
 	temp = temp->next;
 	while (temp)
 	{
-		if (temp->data > top)
-			return(0);
+		if (temp->data < top)
+			return (0);
 		temp = temp->next;
 	}
 	return (1);
 }
 
-
-
-void sort_b(t_stack **b)
+void sort_a(t_stack **a)
 {
-		if ((*b)->next && (*b)->data < lstlast(*b)->data && (*b)->data < (*b)->next->data)
-			rb(b);
-		if ((*b)->next && (*b)->data < lstlast(*b)->data)
-			rrb(b);
-		if ((*b)->next && (*b)->data < (*b)->next->data)
-			sb(*b);
+	if ((*a)->next && (*a)->data > lstlast(*a)->data && (*a)->data > (*a)->next->data)
+		ra(a);
+	else if ((*a)->next && (*a)->data > lstlast(*a)->data)
+		rra(a);
+	if ((*a)->next && (*a)->data > (*a)->next->data)
+		sa(*a);
 }
 
 void sortStack(t_stack **a, t_stack **b)
 {
-	if (!*b)
-		return ;
-	while (!is_MaxInTop(b))
-		rb(b);
-	pa(a, b);
-	sortStack(a, b);
-}
-
-void partition(t_stack **a, t_stack **b, int len)
-{
-	int pivot = (*a)->data;
+	sort_a(a);
+	while (!is_MinInTop(a))
+		ra(a);
 	pb(b, a);
-	while (--len)
-	{
-		if ((*a)->data < pivot)
-		{
-			pb(b, a);
-			sort_b(b);
-		}
-		else
-			ra(a);
-	}
+	sort_a(a);
+	if (!*a || !is_sorted(a, 'a'))
+		sortStack(a, b);
 }
 
 int main(int ac, char **av)
 {
 	if (ac < 2)
 		return (0);
-	t_stack		*a;
-	t_stack		*b;
+	t_stack *a;
+	t_stack *b;
 
 	a = NULL;
 	b = NULL;
@@ -156,14 +139,17 @@ int main(int ac, char **av)
 		ft_putstr("Error\n");
 		return (1);
 	}
-	partition(&a, &b, ac - 1);
-	pb_loop(&b, &a);
+	if (is_sorted(&a, 'a'))
+		return 0;
+	// partition(&a, &b, ac - 1);
+	// pb_loop(&b, &a);
 	// printf("a =======\n");
 	// print_arr(&a);
 	// printf("b =======\n");
 	// print_arr(&b);
 	sortStack(&a, &b);
-	printf("sorted ======= %d\n", is_sorted(&a, 'a'));
+	pa_loop(&a, &b);
+	// printf("sorted ======= %d\n", is_sorted(&a, 'a'));
 	// print_arr(&a);
 	return 0;
 }
