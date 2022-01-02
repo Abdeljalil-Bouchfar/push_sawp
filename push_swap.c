@@ -87,21 +87,27 @@ int is_sorted(t_stack **stack, char c)
 	return (0);
 }
 
-int is_MinInTop(t_stack **stack)
+int minIndex(t_stack **stack)
 {
 	t_stack *temp = *stack;
 
 	if (!temp || !temp->next)
-		return (1);
-	int top = temp->data;
+		return (0);
+	int min = temp->data;
+	int i = 1;
+	int min_index = 0;
 	temp = temp->next;
 	while (temp)
 	{
-		if (temp->data < top)
-			return (0);
+		if (temp->data < min)
+		{
+			min = temp->data;
+			min_index = i;
+		}
 		temp = temp->next;
+		i++;
 	}
-	return (1);
+	return (min_index);
 }
 
 void sort_a(t_stack **a)
@@ -114,15 +120,21 @@ void sort_a(t_stack **a)
 		sa(*a);
 }
 
-void sortStack(t_stack **a, t_stack **b)
+void sortStack(t_stack **a, t_stack **b, int len)
 {
 	sort_a(a);
-	while (!is_MinInTop(a))
-		ra(a);
-	pb(b, a);
-	sort_a(a);
-	if (!*a || !is_sorted(a, 'a'))
-		sortStack(a, b);
+	int i = minIndex(a);
+	if (i > len / 2)
+		while (i++ < len)
+			rra(a);
+	else
+		while (i--)
+			ra(a);
+	if (!is_sorted(a, 'a'))
+	{
+		pb(b, a);
+		sortStack(a, b, --len);
+	}
 }
 
 int main(int ac, char **av)
@@ -147,9 +159,10 @@ int main(int ac, char **av)
 	// print_arr(&a);
 	// printf("b =======\n");
 	// print_arr(&b);
-	sortStack(&a, &b);
+	sortStack(&a, &b, ac - 1);
 	pa_loop(&a, &b);
-	// printf("sorted ======= %d\n", is_sorted(&a, 'a'));
+	//printf("sorted =======> %d\n", is_sorted(&a, 'a'));
+	// printf("a =======\n");
 	// print_arr(&a);
 	return 0;
 }
