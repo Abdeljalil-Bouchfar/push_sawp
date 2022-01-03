@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdeljalilbouchfar <abdeljalilbouchfar@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 10:55:23 by abouchfa          #+#    #+#             */
-/*   Updated: 2021/12/22 18:54:16 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/01/03 10:47:54 by abdeljalilb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	lst_swap(t_stack *a, t_stack *b)
 {

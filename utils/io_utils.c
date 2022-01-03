@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   io_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdeljalilbouchfar <abdeljalilbouchfar@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 12:39:52 by abouchfa          #+#    #+#             */
-/*   Updated: 2021/12/22 22:09:13 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/01/03 10:47:33 by abdeljalilb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ft_putstr(char *str)
 {
@@ -49,7 +49,31 @@ int	ft_strncmp(const char *s1, const char *s2)
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-int	check_input_error (char **av, int len)
+int set_a(char **av, int len, t_stack **a)
+{
+	int i;
+	long int tmp;
+	t_stack *temp_stack;
+
+	if (check_input_error(av, len))
+		return (1);
+	i = 0;
+	while (i < len)
+	{
+		temp_stack = malloc(sizeof(t_stack));
+		tmp = ft_atol(av[i]);
+		if (tmp > INT_MAX || tmp < INT_MIN)
+			return (1);
+		temp_stack->data = tmp;
+		temp_stack->next = NULL;
+		temp_stack->prev = NULL;
+		lstadd_back(a, temp_stack);
+		i++;
+	}
+	return (0);
+}
+
+int	check_input_error(char **av, int len)
 {
 	int	i;
 	int	j;
