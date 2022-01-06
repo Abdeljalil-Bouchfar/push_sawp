@@ -6,7 +6,7 @@
 /*   By: abdeljalilbouchfar <abdeljalilbouchfar@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:29:04 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/01/03 11:13:35 by abdeljalilb      ###   ########.fr       */
+/*   Updated: 2022/01/06 15:36:34 by abdeljalilb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void sortBigStack(t_stack **a, t_stack **b, int len)
 void sortSmallStack(t_stack **a, t_stack **b, int len)
 {
 	sort_a(a);
+	if (is_sorted(a, 'a'))
+		return;
 	int i = minIndex(a);
 	if (i > len / 2)
 		while (i++ < len)
@@ -55,22 +57,30 @@ void sortSmallStack(t_stack **a, t_stack **b, int len)
 	}
 }
 
-void partition(t_stack **a, t_stack **b, int len)
+void partition(t_stack **a, t_stack **b, int size)
 {
-	int pivot = (*a)->data;
-	pb(b, a);
-	while (--len)
+	int tmp = size;
+	int pivot = get_medium(a, size);
+	while (--tmp)
 	{
-		if ((*a)->data < pivot)
+		//sort_a(a);
+		//next = nextMinIndex();
+		if ((*a)->data <= pivot)
 		{
 			pb(b, a);
+			size--;
 		}
-		else
+		else if ((*a)->data > pivot)
+		{
 			ra(a);
+		}
 	}
+	if (*a && (*a)->next)
+		partition(a, b, size);
 }
 int main(int ac, char **av)
 {
+	int size;
 	if (ac < 2)
 		return (0);
 	t_stack *a;
@@ -78,7 +88,8 @@ int main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
-	if (set_a(av + 1, ac - 1, &a))
+	size = ac - 1;
+	if (set_a(av + 1, size, &a))
 	{
 		ft_putstr("Error\n");
 		return (1);
@@ -87,22 +98,14 @@ int main(int ac, char **av)
 		return 0;
 	if (ac > 11)
 	{
-		partition(&a, &b, ac - 1);
+		partition(&a, &b, size);
 		pb_loop(&b, &a);
-		sortBigStack(&a, &b, ac - 1);
+		sortBigStack(&a, &b, size);
 	}
 	else
 	{
-		sortSmallStack(&a, &b, ac - 1);
+		sortSmallStack(&a, &b, size);
 		pa_loop(&a, &b);
 	}
-	// printf("a =======\n");
-	// print_arr(&a);
-	// printf("b =======\n");
-	// print_arr(&b);
-	//pa_loop(&a, &b);
-	//printf("sorted =======> %d\n", is_sorted(&a, 'a'));
-	// printf("a =======\n");
-	// print_arr(&a);
 	return 0;
 }

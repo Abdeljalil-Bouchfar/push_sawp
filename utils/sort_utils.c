@@ -2,21 +2,25 @@
 
 void sort_a(t_stack **a)
 {
-	if ((*a)->next && (*a)->data > lstlast(*a)->data && (*a)->data > (*a)->next->data)
+	if (!*a || !(*a)->next)
+		return;
+	if ((*a)->data > lstlast(*a)->data && (*a)->data > (*a)->next->data)
 		ra(a);
-	if ((*a)->next && (*a)->data > lstlast(*a)->data)
+	if ((*a)->data > lstlast(*a)->data)
 		rra(a);
-	if ((*a)->next && (*a)->data > (*a)->next->data)
+	if ((*a)->data > (*a)->next->data)
 		sa(*a);
 }
 
 void sort_b(t_stack **b)
 {
-	if ((*b)->next && (*b)->data < lstlast(*b)->data && (*b)->data < (*b)->next->data)
+	if (!*b || !(*b)->next)
+		return ;
+	if ((*b)->data < lstlast(*b)->data && (*b)->data < (*b)->next->data)
 		rb(b);
-	if ((*b)->next && (*b)->data < lstlast(*b)->data)
+	if ((*b)->data < lstlast(*b)->data)
 		rrb(b);
-	if ((*b)->next && (*b)->data < (*b)->next->data)
+	if ((*b)->data < (*b)->next->data)
 		sb(*b);
 }
 
@@ -64,28 +68,28 @@ int minIndex(t_stack **stack)
 	return (min_index);
 }
 
-int nextMinIndex(t_stack **stack, int pivot)
-{
-	t_stack *temp = *stack;
+// int nextMinIndex(t_stack **stack, int pivot)
+// {
+// 	t_stack *temp = *stack;
 
-	if (!temp || !temp->next)
-		return (0);
-	int min = temp->data;
-	int i = 1;
-	int min_index = 0;
-	temp = temp->next;
-	while (temp)
-	{
-		if (temp->data < min)
-		{
-			min = temp->data;
-			min_index = i;
-		}
-		temp = temp->next;
-		i++;
-	}
-	return (min_index);
-}
+// 	if (!temp)
+// 		return (0);
+// 	int min = temp->data;
+// 	int i = 1;
+// 	int min_index = 0;
+// 	temp = temp->next;
+// 	while (temp)
+// 	{
+// 		if (temp->data < min)
+// 		{
+// 			min = temp->data;
+// 			min_index = i;
+// 		}
+// 		temp = temp->next;
+// 		i++;
+// 	}
+// 	return (min_index);
+// }
 
 int maxIndex(t_stack **stack)
 {
