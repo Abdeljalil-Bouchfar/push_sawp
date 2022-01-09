@@ -6,7 +6,7 @@
 /*   By: abdeljalilbouchfar <abdeljalilbouchfar@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:29:04 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/01/06 15:36:34 by abdeljalilb      ###   ########.fr       */
+/*   Updated: 2022/01/09 16:19:26 by abdeljalilb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,42 @@ void sortSmallStack(t_stack **a, t_stack **b, int len)
 	}
 }
 
-void partition(t_stack **a, t_stack **b, int size)
+int	get_frame(int size)
+{
+	if (size >= 500)
+		return (70);
+	if (size >= 400)
+		return (60);
+	if (size >= 300)
+		return (50);
+	if (size >= 200)
+		return (40);
+	if (size >= 100)
+		return (60);
+	if (size >= 50)
+		return (30);
+	else
+		return (size);
+}
+
+void partition(t_stack **a, t_stack **b, int size, int frame)
 {
 	int tmp = size;
-	int pivot = get_medium(a, size);
+	if (size < frame)
+		frame = size;
+	int pivot = get_medium(a, size, frame);
 	while (--tmp)
 	{
-		//sort_a(a);
-		//next = nextMinIndex();
 		if ((*a)->data <= pivot)
 		{
 			pb(b, a);
 			size--;
 		}
-		else if ((*a)->data > pivot)
-		{
+		else 
 			ra(a);
-		}
 	}
-	if (*a && (*a)->next)
-		partition(a, b, size);
+	if (size > 2)
+		partition(a, b, size, frame);
 }
 int main(int ac, char **av)
 {
@@ -96,9 +112,9 @@ int main(int ac, char **av)
 	}
 	if (is_sorted(&a, 'a'))
 		return 0;
-	if (ac > 11)
+	if (size > 10)
 	{
-		partition(&a, &b, size);
+		partition(&a, &b, size, get_frame(size));
 		pb_loop(&b, &a);
 		sortBigStack(&a, &b, size);
 	}

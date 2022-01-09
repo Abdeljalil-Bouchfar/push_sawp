@@ -6,7 +6,7 @@
 /*   By: abdeljalilbouchfar <abdeljalilbouchfar@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 09:05:27 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/01/06 13:27:10 by abdeljalilb      ###   ########.fr       */
+/*   Updated: 2022/01/09 14:36:42 by abdeljalilb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ long	ft_atol(const char *str);
 int 	set_a(char **av, int len, t_stack **a);
 int		check_input_error (char **av, int len);
 
-int		get_medium(t_stack **a, int size);
+int		get_medium(t_stack **a, int size, int frame);
 
 void	lst_swap(t_stack *a, t_stack *b);
 void	lstadd_back(t_stack **lst, t_stack *new);

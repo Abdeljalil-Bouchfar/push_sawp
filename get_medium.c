@@ -24,7 +24,7 @@ void get_arr(t_stack **a, int *tab)
 	}
 }
 
-int	get_medium(t_stack **a, int size)
+int	get_medium(t_stack **a, int size, int frame)
 {
 	int	i;
 	int	j;
@@ -46,6 +46,6 @@ int	get_medium(t_stack **a, int size)
 		ft_swap(&tab[min_index], &tab[i]);
 		i++;
 	}
-	i = size / 2;
+	i = frame / 2;
 	return tab[i];
 }
