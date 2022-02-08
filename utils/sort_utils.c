@@ -68,29 +68,6 @@ int minIndex(t_stack **stack)
 	return (min_index);
 }
 
-// int nextMinIndex(t_stack **stack, int pivot)
-// {
-// 	t_stack *temp = *stack;
-
-// 	if (!temp)
-// 		return (0);
-// 	int min = temp->data;
-// 	int i = 1;
-// 	int min_index = 0;
-// 	temp = temp->next;
-// 	while (temp)
-// 	{
-// 		if (temp->data < min)
-// 		{
-// 			min = temp->data;
-// 			min_index = i;
-// 		}
-// 		temp = temp->next;
-// 		i++;
-// 	}
-// 	return (min_index);
-// }
-
 int maxIndex(t_stack **stack)
 {
 	t_stack *temp = *stack;

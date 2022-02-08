@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdeljalilbouchfar <abdeljalilbouchfar@    +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:29:04 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/01/09 16:19:26 by abdeljalilb      ###   ########.fr       */
+/*   Updated: 2022/02/08 13:30:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void print_arr(t_stack **stack)
-{
-	t_stack *temp = *stack;
-	while (temp)
-	{
-		printf("data: %d\n", temp->data);
-		temp = temp->next;
-	}
-}
 
 void sortBigStack(t_stack **a, t_stack **b, int len)
 {
@@ -59,27 +49,21 @@ void sortSmallStack(t_stack **a, t_stack **b, int len)
 
 int	get_frame(int size)
 {
-	if (size >= 500)
-		return (70);
-	if (size >= 400)
-		return (60);
-	if (size >= 300)
-		return (50);
-	if (size >= 200)
-		return (40);
-	if (size >= 100)
-		return (60);
-	if (size >= 50)
-		return (30);
+	if (size > 200)
+		return size / 4;
+	else if (size > 100)
+		return size / 3;
+	else if (size > 20)
+		return size / 2;
 	else
-		return (size);
+	 	return size;
 }
 
-void partition(t_stack **a, t_stack **b, int size, int frame)
+void partition(t_stack **a, t_stack **b, int size)
 {
 	int tmp = size;
-	if (size < frame)
-		frame = size;
+	int frame = get_frame(size);
+	int i = 0;
 	int pivot = get_medium(a, size, frame);
 	while (--tmp)
 	{
@@ -87,12 +71,15 @@ void partition(t_stack **a, t_stack **b, int size, int frame)
 		{
 			pb(b, a);
 			size--;
+			i++;
+			if (frame / 2 == i)
+				break ;
 		}
 		else 
 			ra(a);
 	}
-	if (size > 2)
-		partition(a, b, size, frame);
+	if (size > 1)
+		partition(a, b, size);
 }
 int main(int ac, char **av)
 {
@@ -114,7 +101,7 @@ int main(int ac, char **av)
 		return 0;
 	if (size > 10)
 	{
-		partition(&a, &b, size, get_frame(size));
+		partition(&a, &b, size);
 		pb_loop(&b, &a);
 		sortBigStack(&a, &b, size);
 	}
