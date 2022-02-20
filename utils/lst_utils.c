@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdeljalilbouchfar <abdeljalilbouchfar@    +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 10:55:23 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/01/03 10:47:54 by abdeljalilb      ###   ########.fr       */
+/*   Updated: 2022/02/15 15:02:19 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../mandatory/push_swap.h"
 
 void	lst_swap(t_stack *a, t_stack *b)
 {
@@ -31,19 +31,6 @@ t_stack	*lstlast(t_stack *stack)
 	while (temp->next)
 		temp = temp->next;
 	return (temp);
-}
-
-t_stack	*lstnew(int n)
-{
-	t_stack	*stack;
-
-	stack = malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
-	stack->data = n;
-	stack->next = NULL;
-	stack->prev = NULL;
-	return (stack);
 }
 
 void	lstadd_back(t_stack **lst, t_stack *new)
@@ -76,4 +63,16 @@ void	lstadd_front(t_stack **lst, t_stack *new)
 	}
 	*lst = new;
 	new->prev = NULL;
+}
+
+void	ft_lstclear(t_stack **lst)
+{
+	t_stack	*temp;
+
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		free(*lst);
+		(*lst) = temp;
+	}
 }
