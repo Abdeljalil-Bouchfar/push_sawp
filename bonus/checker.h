@@ -6,12 +6,12 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 09:05:27 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/02/19 21:02:57 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/02/20 06:41:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <stdlib.h>
 # include <unistd.h>

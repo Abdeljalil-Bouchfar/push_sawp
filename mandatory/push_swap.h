@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 09:05:27 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/02/19 21:01:46 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/02/20 06:42:10 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		min_index(t_stack **stack);
 /*			utils/big_sort_utils.c			*/
 int		is_min(t_nbr_info	*max_three, int nbr);
 void	get_max_three(t_stack **stack, t_nbr_info *max_three, int size);
-
 
 /*			utils/io_utils.c				*/
 void	ft_putstr(char *str, int fd);
