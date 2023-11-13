@@ -1,6 +1,5 @@
 # push_sawp
-This project involves sorting data on a stack, with a limited set of instructions, and with as few operations as possible.
-
+Create an algorithm to sort data on a stack in the fewest operations possible, using a limited set of instructions.
 
 ## Understand the project:
 The goal is to sort in ascending order numbers into stack a. To do so you have the following operations at your disposal:
